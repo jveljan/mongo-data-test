@@ -1,4 +1,4 @@
-package com.joco.playground;
+package com.joco.playground.test.tools;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

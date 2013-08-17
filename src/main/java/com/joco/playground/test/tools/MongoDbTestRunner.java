@@ -1,4 +1,4 @@
-package com.joco.playground;
+package com.joco.playground.test.tools;
 
 import java.io.IOException;
 import java.io.InputStream;
