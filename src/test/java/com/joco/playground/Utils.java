@@ -14,11 +14,7 @@ public class Utils {
 
 	
 	public static <T> T readClasspathFiletoJSON(String file, Class<T> clazz) throws IOException {
-		file = file.startsWith("/") ? file : "/" + file;
-		InputStream is = Utils.class.getResourceAsStream(file);
-		if(is == null) {
-			throw new FileNotFoundException(file);
-		}
+		InputStream is = getInputStreamFromClassPath(file);
 		try {
 			String str = readInputStreamToString(is, "UTF-8");
 			return mapper.readValue(str, clazz);
@@ -26,9 +22,18 @@ public class Utils {
 			IOUtils.closeQuietly(is);
 		}
 	}
+	
+	public static InputStream getInputStreamFromClassPath(String file) throws FileNotFoundException {
+		file = file.startsWith("/") ? file : "/" + file;
+		InputStream is = Utils.class.getResourceAsStream(file);
+		if(is == null) {
+			throw new FileNotFoundException(file);
+		}
+		return is;
+	}
 
 
-	private static String readInputStreamToString(InputStream is, String encoding) throws IOException {
+	public static String readInputStreamToString(InputStream is, String encoding) throws IOException {
 		StringWriter sw = new StringWriter();
 		IOUtils.copy(is, sw, encoding);
 		return sw.toString();

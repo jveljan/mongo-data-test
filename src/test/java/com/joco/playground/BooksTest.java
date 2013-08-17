@@ -1,46 +1,48 @@
 package com.joco.playground;
 
-import org.jongo.Jongo;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Iterator;
+
 import org.jongo.MongoCollection;
-import org.jongo.ResultHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.mongodb.DB;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-
-@RunWith(value=MongoDbTestRunner.class)
+@RunWith(value = MongoDbTestRunner.class)
 @MongoInit("test-db.json.js")
 public class BooksTest {
-	private static final String DB_NAME = "db1";
+	private static final String DB_NAME = "test-db";
 	private static final String COLLECTION_NAME = "books";
 
-	private MongoCollection books;
+	private MongoCollection booksCollection;
 
 	@Before
 	public void setUp() throws Exception {
-		MongoClient mongoClient = new MongoClient("localhost");
-		DB db = mongoClient.getDB(DB_NAME);
-		//CollectionFromJson.init(db, COLLECTION_NAME);
-
-		Jongo jongo = new Jongo(db);
-		books = jongo.getCollection(COLLECTION_NAME);
+		booksCollection = JongoTestUtils.getCollection(DB_NAME, COLLECTION_NAME);
 	}
-
-	ResultHandler<String> jsonStringResultHandler = new ResultHandler<String>() {
-		public String map(DBObject result) {
-			return result.toString();
+	
+	private int count(Iterable<?> iterable) {
+		int r = 0;
+		Iterator<?> it = iterable.iterator();
+		while(it.hasNext()) {
+			it.next(); r++;
 		}
-	};
+		return r;
+	}
 
 	@Test
 	public void test() {
-		//fail("Not yet implemented");
-		Iterable<String> it = books.find().map(jsonStringResultHandler);
-		for(String json : it) {
-			System.out.println(json);
-		}
+		Iterable<Book> books = booksCollection.find().as(Book.class);
+		assertEquals(5, count(books));
+	}
+
+	
+
+	@Test
+	public void test1() {
+		Iterable<Book> javaBooks = booksCollection.find("{name:{$regex: 'Java*'}}").as(Book.class);
+		assertEquals(1, count(javaBooks));
+		
 	}
 }
