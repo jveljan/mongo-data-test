@@ -1,4 +1,4 @@
-package com.joco.playground;
+package com.joco.playground.mongo;
 
 import java.util.HashMap;
 import java.util.Map;

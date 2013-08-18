@@ -1,4 +1,4 @@
-package com.joco.playground;
+package com.joco.playground.mongo;
 
 import java.io.IOException;
 import java.io.InputStream;
