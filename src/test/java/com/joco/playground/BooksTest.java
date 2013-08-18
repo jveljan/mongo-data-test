@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.joco.playground.model.Book;
+import com.joco.playground.model.base.BaseToJsonStringObject;
 import com.joco.playground.test.tools.JongoTestUtils;
 import com.joco.playground.test.tools.MongoDbTestRunner;
 import com.joco.playground.test.tools.MongoInit;

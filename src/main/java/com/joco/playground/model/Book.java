@@ -1,4 +1,6 @@
-package com.joco.playground;
+package com.joco.playground.model;
+
+import com.joco.playground.model.base.BaseIdentityJsonObject;
 
 
 public class Book extends BaseIdentityJsonObject {

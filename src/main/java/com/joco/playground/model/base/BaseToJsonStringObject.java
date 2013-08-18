@@ -1,4 +1,4 @@
-package com.joco.playground;
+package com.joco.playground.model.base;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

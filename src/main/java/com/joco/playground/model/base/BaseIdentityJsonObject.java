@@ -1,4 +1,4 @@
-package com.joco.playground;
+package com.joco.playground.model.base;
 
 
 
