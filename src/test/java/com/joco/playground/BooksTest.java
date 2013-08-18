@@ -3,7 +3,6 @@ package com.joco.playground;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.jongo.MongoCollection;
@@ -12,7 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.joco.playground.model.Book;
-import com.joco.playground.model.base.BaseToJsonStringObject;
+import com.joco.playground.model.BookCount;
 import com.joco.playground.mongo.MapReduceCommandCenter;
 import com.joco.playground.mongo.MapReduceOutputHelper;
 import com.joco.playground.test.MongoDbTestRunner;
@@ -35,38 +34,17 @@ public class BooksTest {
 	public void setUp() throws Exception {
 		booksCollection = JongoUtils.getCollection(DB_NAME, COLLECTION_NAME);
 	}
-	
-	private int count(Iterable<?> iterable) {
-		int r = 0;
-		Iterator<?> it = iterable.iterator();
-		while(it.hasNext()) {
-			it.next(); r++;
-		}
-		return r;
-	}
 
 	@Test
 	public void test() {
 		Iterable<Book> books = booksCollection.find().as(Book.class);
-		assertEquals(5, count(books));
+		assertEquals(5, JongoUtils.countItems(books));
 	}
-
 	
-
 	@Test
 	public void test1() {
 		Iterable<Book> javaBooks = booksCollection.find("{name:{$regex: 'Java*'}}").as(Book.class);
-		assertEquals(1, count(javaBooks));	
-	}
-	
-	public static class BookCount extends BaseToJsonStringObject {
-		private int books;
-		public int getBooks() {
-			return books;
-		}
-		public void setBooks(int books) {
-			this.books = books;
-		}
+		assertEquals(1, JongoUtils.countItems(javaBooks));	
 	}
 	
 	@Test
@@ -78,6 +56,7 @@ public class BooksTest {
 		MapReduceOutputHelper outputHelper = new MapReduceOutputHelper(output);
 		Map<String, BookCount> map = outputHelper.toMap(String.class, BookCount.class);
 		
-		System.out.println(map);
+		assertEquals(3, map.get("Small Books").getBooks());
+		assertEquals(2, map.get("Big Books").getBooks());
 	}
 }

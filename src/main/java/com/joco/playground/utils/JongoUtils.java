@@ -2,6 +2,7 @@ package com.joco.playground.utils;
 
 import java.io.PrintStream;
 import java.net.UnknownHostException;
+import java.util.Iterator;
 
 import org.jongo.Find;
 import org.jongo.Jongo;
@@ -32,5 +33,14 @@ public class JongoUtils {
 		for(String json : it) {
 			ps.println(json);
 		}
+	}
+	
+	public static int countItems(Iterable<?> iterable) {
+		int r = 0;
+		Iterator<?> it = iterable.iterator();
+		while(it.hasNext()) {
+			it.next(); r++;
+		}
+		return r;
 	}
 }
