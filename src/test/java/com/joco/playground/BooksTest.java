@@ -21,7 +21,7 @@ import com.joco.playground.utils.JongoUtils;
 import com.mongodb.MapReduceCommand;
 import com.mongodb.MapReduceOutput;
 
-@RunWith(value = MongoDbTestRunner.class)
+@RunWith(MongoDbTestRunner.class)
 @MongoInit("test-db.json.js")
 public class BooksTest {
 	private static final String DB_NAME = "test-db";
