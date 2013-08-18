@@ -71,7 +71,7 @@ public class BooksTest {
 	
 	@Test
 	public void testMapReduce() throws IOException {
-		String path = "test-db/fn/mapreduce/books";
+		String path = "mapreduce/books";
 		MapReduceCommand command = mapReduce.getMapReduce(path, booksCollection.getDBCollection());
 		MapReduceOutput output = booksCollection.getDBCollection().mapReduce(command);
 		
