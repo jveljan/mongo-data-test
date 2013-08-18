@@ -1,4 +1,4 @@
-package com.joco.playground.test.tools;
+package com.joco.playground.utils;
 
 import java.io.PrintStream;
 import java.net.UnknownHostException;
@@ -12,7 +12,7 @@ import com.mongodb.DB;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
-public class JongoTestUtils {
+public class JongoUtils {
 	public static MongoCollection getCollection(String dbName,
 			String collectionName) throws UnknownHostException {
 		MongoClient mongoClient = new MongoClient("localhost");

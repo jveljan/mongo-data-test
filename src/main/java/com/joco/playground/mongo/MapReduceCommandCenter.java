@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
-import com.joco.playground.test.tools.Utils;
+import com.joco.playground.utils.ResourceUtils;
 import com.mongodb.DBCollection;
 import com.mongodb.MapReduceCommand;
 import com.mongodb.MapReduceCommand.OutputType;
@@ -33,8 +33,8 @@ public class MapReduceCommandCenter {
 	private String read(String file) throws IOException {
 		InputStream is = null;
 		try {
-			is = Utils.getInputStreamFromClassPath(file);
-			return Utils.readInputStreamToString(is, "UTF-8");
+			is = ResourceUtils.getInputStreamFromClassPath(file);
+			return ResourceUtils.readInputStreamToString(is, "UTF-8");
 		} finally {
 			IOUtils.closeQuietly(is);
 		}

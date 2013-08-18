@@ -15,9 +15,9 @@ import com.joco.playground.model.Book;
 import com.joco.playground.model.base.BaseToJsonStringObject;
 import com.joco.playground.mongo.MapReduceCommandCenter;
 import com.joco.playground.mongo.MapReduceOutputHelper;
-import com.joco.playground.test.tools.JongoTestUtils;
-import com.joco.playground.test.tools.MongoDbTestRunner;
-import com.joco.playground.test.tools.MongoInit;
+import com.joco.playground.test.MongoDbTestRunner;
+import com.joco.playground.test.MongoInit;
+import com.joco.playground.utils.JongoUtils;
 import com.mongodb.MapReduceCommand;
 import com.mongodb.MapReduceOutput;
 
@@ -33,7 +33,7 @@ public class BooksTest {
 
 	@Before
 	public void setUp() throws Exception {
-		booksCollection = JongoTestUtils.getCollection(DB_NAME, COLLECTION_NAME);
+		booksCollection = JongoUtils.getCollection(DB_NAME, COLLECTION_NAME);
 	}
 	
 	private int count(Iterable<?> iterable) {

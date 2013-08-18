@@ -1,4 +1,4 @@
-package com.joco.playground.test.tools;
+package com.joco.playground.test;
 
 import java.util.Map;
 
@@ -6,7 +6,6 @@ public class DbInitConfig {
 	private String host;
 	private String database;
 	private Map<String, String> collections;
-	private DbConfigFunctions functions;
 	
 	public String getHost() {
 		return host;
@@ -25,11 +24,5 @@ public class DbInitConfig {
 	}
 	public void setCollections(Map<String, String> collections) {
 		this.collections = collections;
-	}
-	public DbConfigFunctions getFunctions() {
-		return functions;
-	}
-	public void setFunctions(DbConfigFunctions functions) {
-		this.functions = functions;
 	}
 }

@@ -1,4 +1,4 @@
-package com.joco.playground.test.tools;
+package com.joco.playground.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Utils {
+public class ResourceUtils {
 	private static final ObjectMapper mapper = new ObjectMapper();
 
 	
@@ -25,7 +25,7 @@ public class Utils {
 	
 	public static InputStream getInputStreamFromClassPath(String file) throws FileNotFoundException {
 		file = file.startsWith("/") ? file : "/" + file;
-		InputStream is = Utils.class.getResourceAsStream(file);
+		InputStream is = ResourceUtils.class.getResourceAsStream(file);
 		if(is == null) {
 			throw new FileNotFoundException(file);
 		}

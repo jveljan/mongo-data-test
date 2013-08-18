@@ -1,4 +1,4 @@
-package com.joco.playground.test.tools;
+package com.joco.playground.test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +16,7 @@ import org.junit.runners.model.TestClass;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.joco.playground.utils.ResourceUtils;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 
@@ -35,7 +36,7 @@ public class MongoDbTestRunner extends BlockJUnit4ClassRunner {
 		
 		String file = ann.value();
 		try {
-			DbInitConfig cfg = Utils.readClasspathFiletoJSON(file, DbInitConfig.class);
+			DbInitConfig cfg = ResourceUtils.readClasspathFiletoJSON(file, DbInitConfig.class);
 			initMongoDb(cfg);
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
@@ -58,8 +59,8 @@ public class MongoDbTestRunner extends BlockJUnit4ClassRunner {
 	}
 	
 	private void insertAll(MongoCollection collection, String classPathFile) throws IOException {
-		InputStream is = Utils.getInputStreamFromClassPath(classPathFile);
-		String str = Utils.readInputStreamToString(is, "UTF-8");
+		InputStream is = ResourceUtils.getInputStreamFromClassPath(classPathFile);
+		String str = ResourceUtils.readInputStreamToString(is, "UTF-8");
 		ObjectMapper om = new ObjectMapper();
 		List<Map<String, Object>> list = om.readValue(str, new TypeReference<List<Map<String, Object>>>(){});
 		for(Map<String, Object> obj : list) {
